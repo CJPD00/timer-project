@@ -1,0 +1,55 @@
+
+$redColor:#E13737;
+$greeColor:#5BE536 ;
+
+body{
+    background-color: #30384b;
+    color: #eee;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+main{
+    padding-top: 50px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 340px;
+}
+
+button{
+    border: none;
+    background-color: transparent;
+    width:80px;
+    color: #D6DBDF ;
+    display: inline-block;
+}
+
+label{
+    display: block;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+
+.slider{
+    height: 40px;
+    border: 2px solid $redColor;
+    border-radius: 20px;
+
+}
+
+.thumb{
+    background-color: $redColor;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 20px;
+
+}
+
+.slider.green { 
+    border: 2px solid $greeColor;
+}
+
+.slider.green .thumb{
+    background-color: $greeColor;
+}
