@@ -1,15 +1,20 @@
-import { useState } from 'react'
+
+import { SettingsContextProvider } from './contexts/SettingsContextProvider'
 import { Timer } from './components/timer'
 import { Settings } from './components/Settings'
+import { useState } from 'react'
 
 function App() {
 
-  const [settings, setsettings] = useState(true)
+  const [settings, setScreen] = useState(false)
 
   return (
 
     <main>
-      {settings ? <Settings></Settings> : <Timer></Timer>}
+      <SettingsContextProvider>
+        {settings ? <Settings setScreen={setScreen}></Settings> : <Timer setScreen={setScreen}></Timer>}
+      </SettingsContextProvider>
+
     </main>
   )
 }

@@ -17,6 +17,11 @@ button {
   width: 80px;
   color: #D6DBDF;
   display: inline-block;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 80%;
 }
 
 label {
@@ -46,4 +51,19 @@ label {
 
 .slider.green .thumb {
   background-color: #5BE536;
+}
+
+.back {
+  background-color: #465474;
+  border-radius: 5px;
+  font-size: 18px;
+  width: 100px;
+  height: 40px;
+}
+
+.back svg {
+  width: 30px;
+  height: 30px;
+  vertical-align: middle;
+  margin-right: 5px;
 }/*# sourceMappingURL=index.css.map */
