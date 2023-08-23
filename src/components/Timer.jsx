@@ -7,14 +7,16 @@ import { useContext } from "react"
 import { SettingsContext } from "../contexts/SettingsContext"
 import { useEffect, useState } from 'react';
 import { useRef } from 'react';
+import { ButtonReset } from './ButtonReset';
 
 const red = '#E13737'
+const green = '#28EB25 '
 
 export const Timer = (props) => {
 
     const sInfo = useContext(SettingsContext)
 
-    const [seconds, setseconds] = useState(0)
+    const [seconds, setseconds] = useState(sInfo.session * 60)
     const [mode, setmode] = useState('session')
 
     const { settings, setsettings } = useContext(SettingsContext)
@@ -40,7 +42,9 @@ export const Timer = (props) => {
 
     const take = () => {
 
-        setseconds(secondsRef.current - 1)
+        secondsRef.current--
+
+        setseconds(secondsRef.current)
 
     }
 
@@ -64,7 +68,7 @@ export const Timer = (props) => {
         const interval = setInterval(() => {
 
             if (isPauseRef.current) return
-            if (secondsRef.current === 0) changeMode()
+            if (secondsRef.current === 0) {changeMode(); document.getElementById('beep').play();}
             take()
 
         }, 1000);
@@ -84,15 +88,20 @@ export const Timer = (props) => {
 
     return (
         <div>
-
+            <audio src='/public/beep-09.mp3' id='beep'></audio>
             <CircularProgressbar value={percentage} text={`${minutes}:${secondsScreen}`} styles={buildStyles({
                 textColor: '#fff',
-                pathColor: red,
+                pathColor: mode === 'session' ? red : green,
                 trailColor: '#D6DBDF'
             })}></CircularProgressbar>
 
             <div style={{ marginTop: '20px' }}>
-                {isPause ? <ButtonPlay></ButtonPlay> : <ButtonPause></ButtonPause>}
+                {isPause ? <ButtonPlay onClick={() => { setisPause(false); isPauseRef.current = false }}></ButtonPlay> : <ButtonPause onClick={() => { setisPause(true); isPauseRef.current = true }}></ButtonPause>}
+                <ButtonReset onClick={() => {
+                    const neSeconds = mode === 'session' ? sInfo.session * 60 : sInfo.breakLength * 60;
+                    setseconds(neSeconds);
+                    secondsRef.current = neSeconds;
+                }}></ButtonReset>
                 <ButtonSettings onClick={() => setsettings(true)}></ButtonSettings>
             </div>
 
